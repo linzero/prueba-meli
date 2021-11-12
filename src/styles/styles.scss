@@ -1,5 +1,7 @@
 @import './base/settings';
 @import './base/base';
+@import './base/buttons';
+@import './base/responsive';
 
 nav.navbar {
     background-color: $primary;
@@ -27,7 +29,7 @@ nav.navbar {
             top: 0px;
             padding: .5em;
             max-width: 38px;
-            max-height: 42px;
+            height: 43px;
         }
     }
 }
@@ -40,6 +42,8 @@ nav.navbar {
         padding: 1em;
         .image-content {
             flex: .3 1;
+            max-height: 300px;
+            text-align: center;
         } 
         .data-content {
             flex: .7 1;
@@ -49,3 +53,25 @@ nav.navbar {
         }
     }
 }
+
+.content-detail {
+    .detailImage {
+        flex: 1 1;
+        padding: 1em;
+        img {
+            width: 100%;
+        }
+    }
+
+    .descItem {
+        flex: .4 1;
+        padding: 1em;
+        h1 {
+            font-size: 1.5em;
+        }
+        .price-content {
+            font-size: 2em;
+        }
+    }
+}
+

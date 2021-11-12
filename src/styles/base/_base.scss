@@ -17,6 +17,10 @@ a {
     margin: 0 auto;
 }
 
+.d-m-flex {
+    display: flex;
+}
+
 .d-flex {
     display: flex;
 }
@@ -25,8 +29,13 @@ a {
     display: inline-block;
 }
 
+.fs-6 {
+    font-size: 2em;
+}
+
 img {
     width: 100%;
+    max-height: 100%;
 }
 
 .mb-0 {
@@ -43,6 +52,14 @@ img {
 
 .p-3 {
     padding: 1em;
+}
+
+.p-6 {
+    padding: 2em;
+}
+
+.border-rounded {
+    border-radius: 2px;
 }
 
 .text-dark-gray {

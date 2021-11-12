@@ -6,14 +6,16 @@ import { DetailComponent } from './detail/DetailComponent';
 export const DetailScreen = () => {
 
     let { id } = useParams();
+
     const [description, setDescription] = useState([])
     const [item, setItem] = useState(false)
-    const [categories, setCategories] = useState([])
+    // const [categories, setCategories] = useState([])
     const [isLoading, setLoading] = useState(false)
 
     useEffect( () => {
+
+
         const getDetail = async () => {
-        
             try{
                 setLoading(true)
                 const url = `${ enviroment.api_base_url }/items/${ id }`;
@@ -30,13 +32,13 @@ export const DetailScreen = () => {
         }
 
         getDetail();
-    }, [])
+    }, [id])
 
 
     return (
         <div className="items_screen_content">
             <div className="container p-3">
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     {   
                         categories.map((cat, index) => {
                             if (index < 6) {
@@ -48,7 +50,7 @@ export const DetailScreen = () => {
                             }
                         })
                     }
-                </div>
+                </div> */}
                 {
                    (item && !isLoading) ?  <DetailComponent item={item} description={description} /> : !isLoading && <div>No se encontraron resultados</div>
                 }

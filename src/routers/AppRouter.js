@@ -5,6 +5,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import { HomeScreen } from '../components/home/HomeScreen';
 import { SearchComponent } from '../components/search/SearchComponent';
 import { ItemsRouter } from './ItemsRouter';
 
@@ -25,7 +26,13 @@ export const AppRouter = () => {
                     </div>
                     
                 </nav>
+                
                 <Routes> 
+                    <Route 
+                        exact
+                        path="/"
+                        element={ <HomeScreen/> }
+                    />
                     {/* Products Route */}
                     <Route 
                         path="items/*"

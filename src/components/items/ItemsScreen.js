@@ -20,7 +20,7 @@ export const ItemsScreen = () => {
                 const resp = await fetch( url ) ;
                 const { results } = await resp.json(); 
                 setItems( results.results );
-                setCategories( results.available_filters[0].values );
+                setCategories( results.filters[0].values );
                 setLoading(false)
             } catch (e) {
                 console.log(e)
@@ -38,10 +38,12 @@ export const ItemsScreen = () => {
                         categories.map((cat, index) => {
                             if (index < 6) {
                                 if (index < categories.length-1 && index !== 5) {
-                                    return <span className="text-dark-gray" key={cat['id']}> {cat['name']} <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8"><path fill="none" stroke="#666" d="M1 0l4 4-4 4"></path></svg> </span>
+                                    return <span className="text-dark-gray" key={`${cat['id']}-${index}`}> {cat['name']} <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8"><path fill="none" stroke="#666" d="M1 0l4 4-4 4"></path></svg> </span>
                                 } else {
-                                    return <span className="text-dark-gray" key={cat['id']}> {cat['name']} </span>
+                                    return <span className="text-dark-gray" key={`${cat['id']}-${index}`}> {cat['name']} </span>
                                 }
+                            } else {
+                                return <></>
                             }
                         })
                     }
