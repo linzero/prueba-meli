@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import queryString from 'query-string'
-import { enviroment } from '../../enviroment/enviroment'
 import { ListComponent } from './list/ListComponent'
+import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { getItems } from '../../actions/items'
 
 
 export const ItemsScreen = () => {
 
-    const [items, setItems] = useState([])
-    const [categories, setCategories] = useState([])
-    const [isLoading, setLoading] = useState(false)
+    const dispatch = useDispatch();
+    const { items, categories } = useSelector( state => state.items );
+    const { loading } = useSelector( state => state.ui );
+    const navigate = useNavigate();
     
     useEffect( () => {
-        const search = queryString.parse(window.location.search).search  
-        const getItems = async () => {
-        
-            try{
-                setLoading(true)
-                const url = `${ enviroment.api_base_url }/items?q=${ search }`;
-                const resp = await fetch( url ) ;
-                const { results } = await resp.json(); 
-                setItems( results.results );
-                setCategories( results.filters[0].values );
-                setLoading(false)
-            } catch (e) {
-                console.log(e)
-            }
-        }
 
-        getItems();
-    }, [])
+        const search = queryString.parse(window.location.search).search  
+        if (search.length === 0) {
+            navigate("/")
+        } else {
+            dispatch( getItems(search) )
+        }
+       
+    }, [dispatch,navigate])
 
     return (
         <div className="items_screen_content">
@@ -38,7 +32,7 @@ export const ItemsScreen = () => {
                         categories.map((cat, index) => {
                             if (index < 6) {
                                 if (index < categories.length-1 && index !== 5) {
-                                    return <span className="text-dark-gray" key={`${cat['id']}-${index}`}> {cat['name']} <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8"><path fill="none" stroke="#666" d="M1 0l4 4-4 4"></path></svg> </span>
+                                    return <span className="text-dark-gray" key={`${new Date().getTime()}-${cat['id']}-${index}`}> {cat['name']} <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8"><path fill="none" stroke="#666" d="M1 0l4 4-4 4"></path></svg> </span>
                                 } else {
                                     return <span className="text-dark-gray" key={`${cat['id']}-${index}`}> {cat['name']} </span>
                                 }
@@ -48,9 +42,9 @@ export const ItemsScreen = () => {
                         })
                     }
                 </div>
-               {
-                   (items.length > 0 && !isLoading) ?  <ListComponent items={items} /> : !isLoading && <div>No se encontraron resultados</div>
-               }
+                {
+                    (items.length > 0 && !loading) ?  <ListComponent items={items} /> : !loading && <div>No se encontraron resultados</div>
+                }
 
             </div>
         </div>

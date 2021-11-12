@@ -1,4 +1,8 @@
 export const types = {
-    login: '[Auth] Login',
-    logout: '[Auth] logout',
+    setItems: '[Items] Set Items',
+    setCategories: '[Items] Set Categories',
+    setItem: '[Items] Set Item',
+
+    uiSetLoading:'[UI] Set Loading',
+    uiRemoveLoading:'[UI] Remove Loading',
 }
